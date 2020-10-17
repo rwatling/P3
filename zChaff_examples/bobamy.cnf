@@ -1,0 +1,14 @@
+c Truth-teller and liar problem
+c 1: Amy is a truth-teller
+c 2: Bob is a truth-teller
+c 3: Cal is a truth-teller
+c
+p cnf 3 8
+-1 -2 0
+2 1 0
+-2 -3 0
+3 2 0
+-3 -1 0
+-3 -2 0
+1 2 3 0
+3 0
