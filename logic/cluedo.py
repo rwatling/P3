@@ -69,8 +69,22 @@ def axiom_card_exists():
     Construct the CNF clauses which represents:
         'Each card is in at least one place'
     """
+
     "*** YOUR CODE HERE ***"
-    return []
+    cards = Cluedo.cards
+    hands = Cluedo.hands
+    retList = []
+    tempList = []
+
+    for c in cards:
+        for hand in hands:
+            identifier = Cluedo.getIdentifierFromNames(hand, c)
+            tempList.append(identifier)
+
+        retList.append(tempList)
+        tempList = []
+    
+    return retList
 
 def axiom_card_unique():
     """
@@ -78,7 +92,12 @@ def axiom_card_unique():
         'If a card is in one place, it can not be in another place'
     """
     "*** YOUR CODE HERE ***"
-    return []
+    cards = Cluedo.cards
+    hands = Cluedo.hands
+    retList = []
+    tempList = []
+    
+    return retList
 
 def axiom_casefile_exists():
     """
