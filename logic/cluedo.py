@@ -52,7 +52,17 @@ class Cluedo:
 def deal(hand, cards):
     "Construct the CNF clauses for the given cards being in the specified hand"
     "*** YOUR CODE HERE ***"
-    return []
+    # hand = who's hand it is
+    # cards = the cards they have in their possesion
+    
+    returnList = []
+    tempList = []
+    for c in cards:
+        tempList = Cluedo.getIdentifierFromNames(hand, c)
+        returnList.append([tempList])
+        tempList = []
+
+    return returnList
 
 def axiom_card_exists():
     """
