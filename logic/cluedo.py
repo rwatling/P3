@@ -112,7 +112,29 @@ def axiom_casefile_exists():
         'At least one card of each category is in the case file'
     """
     "*** YOUR CODE HERE ***"
-    return []
+    weapons = Cluedo.weapons
+    suspects = Cluedo.suspects
+    rooms = Cluedo.rooms
+    weaponLoc = []
+    suspectLoc = []
+    roomLoc = []
+    retList = []
+    casefile = Cluedo.casefile
+
+    for w in weapons:
+        weaponLoc.append(Cluedo.getIdentifierFromNames(casefile, w))
+
+    for s in suspects:
+        suspectLoc.append(Cluedo.getIdentifierFromNames(casefile, s))
+
+    for r in rooms:
+        roomLoc.append(Cluedo.getIdentifierFromNames(casefile,r))
+
+    retList.append(weaponLoc)
+    retList.append(suspectLoc)
+    retList.append(roomLoc)
+
+    return retList
 
 def axiom_casefile_unique():
     """
@@ -120,7 +142,31 @@ def axiom_casefile_unique():
         'No two cards in each category are in the case file'
     """
     "*** YOUR CODE HERE ***"
-    return []
+    weapons = Cluedo.weapons
+    suspects = Cluedo.suspects
+    rooms = Cluedo.rooms
+    caseIndex = len(Cluedo.hands) - 1
+    retList = []
+
+    for w in range(len(weapons)):
+        for w2 in range(w+1, len(weapons)):
+            id_w = Cluedo.getIdentifierFromIndicies(caseIndex, w)
+            id_w2 = Cluedo.getIdentifierFromIndicies(caseIndex, w2)
+            retList.append([-1 * id_w, -1 * id_w2])
+    
+    for s in range(len(suspects)):
+        for s2 in range(s+1, len(suspects)):
+            id_s = Cluedo.getIdentifierFromIndicies(caseIndex, s)
+            id_s2 = Cluedo.getIdentifierFromIndicies(caseIndex, s2)
+            retList.append([-1 * id_s, -1 * id_s2])
+
+    for r in range(len(rooms)):
+        for r2 in range(r+1, len(rooms)):
+            id_r = Cluedo.getIdentifierFromIndicies(caseIndex, r)
+            id_r2 = Cluedo.getIdentifierFromIndicies(caseIndex, r2)
+            retList.append([-1 * id_r, -1 * id_r2])
+    
+    return retList
 
 def suggest(suggester, card1, card2, card3, refuter, cardShown):
     "Construct the CNF clauses representing facts and/or clauses learned from a suggestion"
