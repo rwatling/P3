@@ -95,7 +95,14 @@ def axiom_card_unique():
     cards = Cluedo.cards
     hands = Cluedo.hands
     retList = []
-    tempList = []
+   
+    for c in range(len(cards)):
+        for i in range(len(hands)):
+            for j in range((i+1), len(hands)):
+                id_i = Cluedo.getIdentifierFromIndicies(i, c)
+                id_j = Cluedo.getIdentifierFromIndicies(j, c)
+                
+                retList.append([-1 * id_i, -1 * id_j])
     
     return retList
 
