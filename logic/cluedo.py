@@ -282,6 +282,11 @@ def accuse(accuser, card1, card2, card3, correct):
         retList.append([c2])
         retList.append([c3])
     else:
+        # In not correct, we learn that card1, card2, and card3 are not in the case file
+        # card1, card2, and card3 are not in the accusers hand.
         retList.append([-1 * c1, -1 * c2, -1 * c3])
+        retList.append([-1 * Cluedo.getIdentifierFromNames(accuser, card1)])
+        retList.append([-1 * Cluedo.getIdentifierFromNames(accuser, card2)])
+        retList.append([-1 * Cluedo.getIdentifierFromNames(accuser, card3)])
     
     return retList
