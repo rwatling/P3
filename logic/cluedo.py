@@ -171,7 +171,55 @@ def axiom_casefile_unique():
 def suggest(suggester, card1, card2, card3, refuter, cardShown):
     "Construct the CNF clauses representing facts and/or clauses learned from a suggestion"
     "*** YOUR CODE HERE ***"
-    return []
+    suspects = Cluedo.suspects
+    cards = Cluedo.cards
+
+    print(suggester)
+    print(card1)
+    print(card2)
+    print(card3)
+    print(refuter)
+    print(cardShown)
+
+    # Case 3: No Refuter
+    if ((refuter == None) and (cardShown == None)):
+        print("case 3")
+    
+    # Case 2: A card is hidden
+    elif (cardShown == None):
+        print("case 2")
+    
+    # Case 1: There is a refuter and they show their card
+    else:
+        i = suspects.index(suggester)
+        j = suspects.index(refuter)
+        infoList = []
+
+        while (i != j):
+            
+            # Cycle through suspect list
+            i += 1
+            if (i == len(suspects)):
+                i = 0
+            
+            # Card indices
+            c1 = cards.index(card1)
+            c2 = cards.index(card2)
+            c3 = cards.index(card3)
+
+            # Gather information
+            # Not the refuters turn
+            if (i != j):
+                infoList.append([-1 * Cluedo.getIdentifierFromIndicies(i, c1)])
+                infoList.append([-1 * Cluedo.getIdentifierFromIndicies(i, c2)])
+                infoList.append([-1 * Cluedo.getIdentifierFromIndicies(i, c3)])
+            # The refuter's turn
+            elif (i == j):
+                infoList.append([Cluedo.getIdentifierFromNames(refuter, cardShown)])
+
+        return infoList
+    
+    return None
 
 def accuse(accuser, card1, card2, card3, correct):
     "Construct the CNF clauses representing facts and/or clauses learned from an accusation"
