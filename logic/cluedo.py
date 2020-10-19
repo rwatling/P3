@@ -175,17 +175,39 @@ def suggest(suggester, card1, card2, card3, refuter, cardShown):
     cards = Cluedo.cards
 
     # Case 3: No Refuter
+    # Gained information: All of the suspects have none of the cards
     if ((refuter == None) and (cardShown == None)):
-        print("case 3")
+        i = suspects.index(suggester)
+        j = suspects.index(suggester) - 1
+        infoList = []
+        
+        while (i != j):         
+            # Cycle through suspect list
+            i += 1
+            if (i == len(suspects)):
+                i = 0
+            
+            # Card indices
+            c1 = cards.index(card1)
+            c2 = cards.index(card2)
+            c3 = cards.index(card3)
+
+            # Gather information
+            infoList.append([-1 * Cluedo.getIdentifierFromIndicies(i, c1)])
+            infoList.append([-1 * Cluedo.getIdentifierFromIndicies(i, c2)])
+            infoList.append([-1 * Cluedo.getIdentifierFromIndicies(i, c3)])
+    
+        return infoList
     
     # Case 2: A card is hidden
+    # Gained information: Not refuters have none of the cards.
+    #                     The refuter has at least one of the cards
     elif (cardShown == None):
         i = suspects.index(suggester)
         j = suspects.index(refuter)
         infoList = []
         
-        while (i != j):
-            
+        while (i != j):         
             # Cycle through suspect list
             i += 1
             if (i == len(suspects)):
@@ -212,6 +234,8 @@ def suggest(suggester, card1, card2, card3, refuter, cardShown):
         return infoList
     
     # Case 1: There is a refuter and they show their card
+    # Gained information: Not reguters have none of the cards.
+    #                     The refuter has cardShown.
     else:
         i = suspects.index(suggester)
         j = suspects.index(refuter)
