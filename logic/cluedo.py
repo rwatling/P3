@@ -270,4 +270,18 @@ def suggest(suggester, card1, card2, card3, refuter, cardShown):
 def accuse(accuser, card1, card2, card3, correct):
     "Construct the CNF clauses representing facts and/or clauses learned from an accusation"
     "*** YOUR CODE HERE ***"
-    return []
+    casefile = Cluedo.casefile
+    retList = []
+
+    c1 = Cluedo.getIdentifierFromNames(casefile, card1)
+    c2 = Cluedo.getIdentifierFromNames(casefile, card2)
+    c3 = Cluedo.getIdentifierFromNames(casefile, card3)
+
+    if (correct):
+        retList.append([c1])
+        retList.append([c2])
+        retList.append([c3])
+    else:
+        retList.append([-1 * c1, -1 * c2, -1 * c3])
+    
+    return retList
